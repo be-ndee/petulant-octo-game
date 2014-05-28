@@ -2,29 +2,45 @@
  * the moveDirection functions:
  * moves the player move-px's into the given direction
  */
-var move = 10;
+var move = 1;
+var topBorder = 0;
+var rightBorder = $("#gameField").width();
+var bottomBorder = $("#gameField").height();
+var leftBorder = 0;
+
+var playerWidth = $("#player").width();
+var playerHeight = $("#player").height();
+
 function moveUp () {
   var top = $("#player").css("top");
   top = getCssPxValue(top) - move;
-  $("#player").css("top", top + "px");
+  if (top >= topBorder) {
+    $("#player").css("top", top + "px");
+  }
 }
 
 function moveRight () {
   var left = $("#player").css("left");
   left = getCssPxValue(left) + move;
-  $("#player").css("left", left + "px");
+  if ((left + playerWidth) <= rightBorder) {
+    $("#player").css("left", left + "px");
+  }
 }
 
 function moveDown () {
   var top = $("#player").css("top");
   top = getCssPxValue(top) + move;
-  $("#player").css("top", top + "px");
+  if ((top + playerHeight) <= bottomBorder) {
+    $("#player").css("top", top + "px");
+  }
 }
 
 function moveLeft () {
   var left = $("#player").css("left");
   left = getCssPxValue(left) - move;
-  $("#player").css("left", left + "px");
+  if (left >= leftBorder) {
+    $("#player").css("left", left + "px");
+  }
 }
 
 // the int will be returned from a css-px-value
@@ -32,3 +48,23 @@ function getCssPxValue (str) {
   var int = str.substr(0, str.length - 2);
   return parseInt(int);
 }
+
+/**
+ * reacts on a pressed arrow-key
+ */
+$(document).keydown( function (event) {
+  switch (event.keyCode) {
+    case 37:
+      moveLeft();
+      break;
+    case 38:
+      moveUp();
+      break;
+    case 39:
+      moveRight();
+      break;
+    case 40:
+      moveDown();
+      break;
+  }
+});

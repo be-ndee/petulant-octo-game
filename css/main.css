@@ -1,5 +1,14 @@
+html, body {
+  margin: 0px;
+}
+
 #gameField {
   position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: green;
+  top: 50px;
+  left: 50px;
 }
 
 #gameField div {
