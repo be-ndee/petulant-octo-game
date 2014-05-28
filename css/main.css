@@ -1,0 +1,15 @@
+#gameField {
+  position: relative;
+}
+
+#gameField div {
+  position: absolute;
+}
+
+#player {
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  top: 10px;
+  left: 10px;
+}
