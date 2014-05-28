@@ -15,32 +15,40 @@ var playerHeight = $("#player").height();
 
 function moveUp () {
   var top = $("#player").css("top");
+  var left = $("#player").css("left");
   top = getCssPxValue(top) - move;
-  if (top >= topBorder) {
+  left = getCssPxValue(left);
+  if (top >= topBorder && !positionIsUsed(top, left)) {
     $("#player").css("top", top + "px");
   }
 }
 
 function moveRight () {
+  var top = $("#player").css("top");
   var left = $("#player").css("left");
+  top = getCssPxValue(top);
   left = getCssPxValue(left) + move;
-  if ((left + playerWidth) <= rightBorder) {
+  if ((left + playerWidth) <= rightBorder && !positionIsUsed(top, left)) {
     $("#player").css("left", left + "px");
   }
 }
 
 function moveDown () {
   var top = $("#player").css("top");
+  var left = $("#player").css("left");
   top = getCssPxValue(top) + move;
-  if ((top + playerHeight) <= bottomBorder) {
+  left = getCssPxValue(left);;
+  if ((top + playerHeight) <= bottomBorder && !positionIsUsed(top, left)) {
     $("#player").css("top", top + "px");
   }
 }
 
 function moveLeft () {
+  var top = $("#player").css("top");
   var left = $("#player").css("left");
+  top = getCssPxValue(top);
   left = getCssPxValue(left) - move;
-  if (left >= leftBorder) {
+  if (left >= leftBorder && !positionIsUsed(top, left)) {
     $("#player").css("left", left + "px");
   }
 }
@@ -68,3 +76,15 @@ $(document).keydown( function (event) {
       break;
   }
 });
+
+function positionIsUsed (top, left) {
+  var position;
+  var used = false;
+  $("#gameField .wall").each(function (index, wall) {
+    position = $(wall).position();
+    if (position.top == top && position.left == left) {
+      used = true;
+    }
+  });
+  return used;
+}
