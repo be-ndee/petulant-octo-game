@@ -2,12 +2,14 @@
  * the moveDirection functions:
  * moves the player move-px's into the given direction
  */
-var move = 1;
+// move-step
+var move = 10;
+// border of gameField
 var topBorder = 0;
 var rightBorder = $("#gameField").width();
 var bottomBorder = $("#gameField").height();
 var leftBorder = 0;
-
+// size of player
 var playerWidth = $("#player").width();
 var playerHeight = $("#player").height();
 
@@ -49,9 +51,7 @@ function getCssPxValue (str) {
   return parseInt(int);
 }
 
-/**
- * reacts on a pressed arrow-key
- */
+// when a key is down, choose the correct move-function if it is an arrow-key
 $(document).keydown( function (event) {
   switch (event.keyCode) {
     case 37:
