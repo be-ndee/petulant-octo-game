@@ -4,14 +4,15 @@
     <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
+    <select id="levelSelect">
+      <option value="1">level 1</option>
+      <option value="2">level 2</option>
+      <option value="3">level 3</option>
+    </select>
+    <button onclick="buildLevelBtnAction();">Build</button>
+    <span id="invalidLevelText">The selected level is invalid!</span>
+
     <div id="gameField">
-      <div id="player"></div>
-      <div id="wall_0" class="wall"></div>
-      <div id="wall_1" class="wall"></div>
-      <div id="wall_2" class="wall"></div>
-      <div id="wall_3" class="wall"></div>
-      <div id="wall_4" class="wall"></div>
-      <div id="wall_5" class="wall"></div>
     </div>
   </body>
   <script charset="utf-8" src="libs/jquery-2.1.1.min.js"></script>

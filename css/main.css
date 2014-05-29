@@ -4,8 +4,6 @@ html, body {
 
 #gameField {
   position: relative;
-  width: 200px;
-  height: 200px;
   background-color: green;
   top: 50px;
   left: 50px;
@@ -19,8 +17,6 @@ html, body {
   width: 10px;
   height: 10px;
   background-color: red;
-  top: 40px;
-  left: 30px;
 }
 
 .wall {
@@ -29,32 +25,6 @@ html, body {
   background-color: black;
 }
 
-#wall_0 {
-  top: 70px;
-  left: 30px;
-}
-
-#wall_1 {
-  top: 60px;
-  left: 90px;
-}
-
-#wall_2 {
-  top: 60px;
-  left: 100px;
-}
-
-#wall_3 {
-  top: 50px;
-  left: 80px;
-}
-
-#wall_4 {
-  top: 80px;
-  left: 80px;
-}
-
-#wall_5 {
-  top: 80px;
-  left: 90px;
+#invalidLevelText {
+  display: none;
 }

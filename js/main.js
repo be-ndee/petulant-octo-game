@@ -13,70 +13,13 @@ var leftBorder = 0;
 var playerWidth = $("#player").width();
 var playerHeight = $("#player").height();
 
-function moveUp () {
-  var top = $("#player").css("top");
-  var left = $("#player").css("left");
-  top = getCssPxValue(top) - move;
-  left = getCssPxValue(left);
-  if (top >= topBorder && !positionIsUsed(top, left)) {
-    $("#player").css("top", top + "px");
-  }
-}
-
-function moveRight () {
-  var top = $("#player").css("top");
-  var left = $("#player").css("left");
-  top = getCssPxValue(top);
-  left = getCssPxValue(left) + move;
-  if ((left + playerWidth) <= rightBorder && !positionIsUsed(top, left)) {
-    $("#player").css("left", left + "px");
-  }
-}
-
-function moveDown () {
-  var top = $("#player").css("top");
-  var left = $("#player").css("left");
-  top = getCssPxValue(top) + move;
-  left = getCssPxValue(left);;
-  if ((top + playerHeight) <= bottomBorder && !positionIsUsed(top, left)) {
-    $("#player").css("top", top + "px");
-  }
-}
-
-function moveLeft () {
-  var top = $("#player").css("top");
-  var left = $("#player").css("left");
-  top = getCssPxValue(top);
-  left = getCssPxValue(left) - move;
-  if (left >= leftBorder && !positionIsUsed(top, left)) {
-    $("#player").css("left", left + "px");
-  }
-}
-
 // the int will be returned from a css-px-value
 function getCssPxValue (str) {
   var int = str.substr(0, str.length - 2);
   return parseInt(int);
 }
 
-// when a key is down, choose the correct move-function if it is an arrow-key
-$(document).keydown( function (event) {
-  switch (event.keyCode) {
-    case 37:
-      moveLeft();
-      break;
-    case 38:
-      moveUp();
-      break;
-    case 39:
-      moveRight();
-      break;
-    case 40:
-      moveDown();
-      break;
-  }
-});
-
+// checks if the given position (top, left) is blocked by a wall
 function positionIsUsed (top, left) {
   var position;
   var used = false;
@@ -87,4 +30,96 @@ function positionIsUsed (top, left) {
     }
   });
   return used;
+}
+
+// move direction (1 - up, 2 - right, 3 - down, 4 - left)
+function movePlayer (direction) {
+  var top = getCssPxValue($("#player").css("top"));
+  var left = getCssPxValue($("#player").css("left"));
+  switch (direction) {
+    case 1:
+      top = top - move;
+      break;
+    case 2:
+      left = left + move;
+      break;
+    case 3:
+      top = top + move;
+      break;
+    case 4:
+      left = left - move;
+      break;
+  }
+  if (top >= topBorder
+      && top <= (bottomBorder - move)
+      && left >= leftBorder
+      && left <= (rightBorder - move)
+      && !positionIsUsed(top, left)) {
+    $("#player").css("top", top + "px");
+    $("#player").css("left", left + "px");
+  }
+}
+
+// when a key is down, choose the correct move-function if it is an arrow-key
+$(document).keydown( function (event) {
+  switch (event.keyCode) {
+    case 37:
+      movePlayer(4);
+      break;
+    case 38:
+      movePlayer(1);
+      break;
+    case 39:
+      movePlayer(2);
+      break;
+    case 40:
+      movePlayer(3);
+      break;
+  }
+});
+
+// called function when build-button is clicked
+function buildLevelBtnAction () {
+  $("#invalidLevelText").hide();
+  loadLevel($("#levelSelect").val());
+}
+
+// loads a level with ID levelId
+function loadLevel (levelId) {
+  $.getJSON("levels/level_" + levelId + ".json", function (data) {
+    buildField(data.config, data.startpoint, data.walls);
+  });
+}
+
+// builds a field
+function buildField (config, startpoint, walls) {
+  // create gameField
+  $("#gameField").empty();
+  $("#gameField").css("width", config.fieldWidth + "px");
+  $("#gameField").css("height", config.fieldHeight + "px");
+  rightBorder = $("#gameField").width();
+  bottomBorder = $("#gameField").height();
+
+  // create player element
+  var playerHtml = '<div id="player" style="top: ' + startpoint.top + 'px; left: ' + startpoint.left + 'px"></div>';
+  $("#gameField").append(playerHtml);
+
+  // create each wall element
+  var wallHtml;
+  $.each(walls, function (id, wall) {
+    if (wall.top == startpoint.top && wall.left == startpoint.left) {
+      $("#invalidLevelText").show();
+      clearGameField();
+      return false;
+    }
+    wallHtml = '<div id="' + id + '" class="wall" style="top: ' + wall.top + 'px; left: ' + wall.left + 'px"></div>';
+    $("#gameField").append(wallHtml);
+  });
+}
+
+// game-field will be cleared
+function clearGameField () {
+  $("#gameField").empty();
+  $("#gameField").css("width", "0px");
+  $("#gameField").css("height", "0px");
 }

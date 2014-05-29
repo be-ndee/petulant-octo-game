@@ -1,0 +1,56 @@
+{
+  "config" : {
+    "fieldWidth" : "180",
+    "fieldHeight" : "200"
+  },
+  "startpoint" : {
+    "top" : "100",
+    "left" : "100"
+  },
+  "walls" : {
+    "wall_0" : {
+      "top" : "0",
+      "left" : "0"
+    },
+    "wall_1" : {
+      "top" : "0",
+      "left" : "10"
+    },
+    "wall_2" : {
+      "top" : "0",
+      "left" : "20"
+    },
+    "wall_3" : {
+      "top" : "0",
+      "left" : "30"
+    },
+    "wall_4" : {
+      "top" : "10",
+      "left" : "30"
+    },
+    "wall_5" : {
+      "top" : "20",
+      "left" : "30"
+    },
+    "wall_6" : {
+      "top" : "30",
+      "left" : "30"
+    },
+    "wall_7" : {
+      "top" : "40",
+      "left" : "30"
+    },
+    "wall_8" : {
+      "top" : "50",
+      "left" : "30"
+    },
+    "wall_9" : {
+      "top" : "50",
+      "left" : "40"
+    },
+    "wall_10" : {
+      "top" : "100",
+      "left" : "140"
+    }
+  }
+}
