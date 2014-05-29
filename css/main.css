@@ -28,3 +28,7 @@ html, body {
 #invalidLevelText {
   display: none;
 }
+
+.selectedWall {
+  background-color: blue;
+}
