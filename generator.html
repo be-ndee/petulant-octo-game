@@ -8,11 +8,15 @@
     Height <input type="number" id="fieldHeight" placeholder="100" min="50" max="300" step="10">
 
     <button onclick="buildField();">show</button>
+    <button onclick="resetGameField();">reset</button>
     <button onclick="saveLevel();">save</button>
+    <br>
+    <textarea id="levelJsonTextarea" rows="8" cols="40"></textarea>
 
     <div id="gameField">
     </div>
   </body>
   <script charset="utf-8" src="libs/jquery-2.1.1.min.js"></script>
+  <script charset="utf-8" src="js/main.js"></script>
   <script charset="utf-8" src="js/generator.js"></script>
 </html>

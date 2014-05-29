@@ -2,8 +2,6 @@
  * the moveDirection functions:
  * moves the player move-px's into the given direction
  */
-// move-step
-var move = 10;
 // border of gameField
 var topBorder = 0;
 var rightBorder = $("#gameField").width();
@@ -12,12 +10,6 @@ var leftBorder = 0;
 // size of player
 var playerWidth = $("#player").width();
 var playerHeight = $("#player").height();
-
-// the int will be returned from a css-px-value
-function getCssPxValue (str) {
-  var int = str.substr(0, str.length - 2);
-  return parseInt(int);
-}
 
 // checks if the given position (top, left) is blocked by a wall
 function positionIsUsed (top, left) {
