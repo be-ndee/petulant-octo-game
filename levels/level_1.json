@@ -4,8 +4,8 @@
     "fieldHeight" : "200"
   },
   "startpoint" : {
-    "top" : "40",
-    "left" : "30"
+    "top" : "100",
+    "left" : "100"
   },
   "walls" : {
     "wall_0" : {
