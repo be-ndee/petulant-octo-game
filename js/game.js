@@ -10,6 +10,8 @@ var leftBorder = 0;
 // size of player
 var playerWidth = $("#player").width();
 var playerHeight = $("#player").height();
+// if already won
+var won = false;
 
 // checks if the given position (top, left) is blocked by a wall
 function positionIsUsed (top, left) {
@@ -50,23 +52,30 @@ function movePlayer (direction) {
     $("#player").css("top", top + "px");
     $("#player").css("left", left + "px");
   }
+
+  if (playerInFinish()) {
+    won = true;
+    alert("You got it!!!");
+  }
 }
 
 // when a key is down, choose the correct move-function if it is an arrow-key
 $(document).keydown( function (event) {
-  switch (event.keyCode) {
-    case 37:
-      movePlayer(4);
-      break;
-    case 38:
-      movePlayer(1);
-      break;
-    case 39:
-      movePlayer(2);
-      break;
-    case 40:
-      movePlayer(3);
-      break;
+  if (!won) {
+    switch (event.keyCode) {
+      case 37:
+        movePlayer(4);
+        break;
+      case 38:
+        movePlayer(1);
+        break;
+      case 39:
+        movePlayer(2);
+        break;
+      case 40:
+        movePlayer(3);
+        break;
+    }
   }
 });
 
@@ -87,6 +96,7 @@ function loadLevel (levelId) {
 function buildField (config, startpoint, walls) {
   // create gameField
   $("#gameField").empty();
+  won = false;
   $("#gameField").css("width", config.fieldWidth + "px");
   $("#gameField").css("height", config.fieldHeight + "px");
   rightBorder = $("#gameField").width();
@@ -107,6 +117,11 @@ function buildField (config, startpoint, walls) {
     wallHtml = '<div id="' + id + '" class="wall" style="top: ' + wall.top + 'px; left: ' + wall.left + 'px"></div>';
     $("#gameField").append(wallHtml);
   });
+
+  var finishHtml = '<div id="finish"></div>';
+  $("#gameField").append(finishHtml);
+  $("#finish").css("top", (bottomBorder - 10) + "px");
+  $("#finish").css("left", (rightBorder - 10) + "px");
 }
 
 // game-field will be cleared
@@ -114,4 +129,15 @@ function clearGameField () {
   $("#gameField").empty();
   $("#gameField").css("width", "0px");
   $("#gameField").css("height", "0px");
+}
+
+// check if player is on finish
+function playerInFinish () {
+  var playerTop = $("#player").css("top");
+  var playerLeft = $("#player").css("left");
+
+  var finishTop = $("#finish").css("top");
+  var finishLeft = $("#finish").css("left");
+
+  return (playerTop == finishTop && playerLeft == finishLeft);
 }

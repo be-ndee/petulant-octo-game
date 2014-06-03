@@ -19,6 +19,12 @@ html, body {
   background-color: red;
 }
 
+#finish {
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+}
+
 .wall {
   width: 10px;
   height: 10px;
